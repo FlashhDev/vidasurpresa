@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nosso Amor</title>
+  <style>
+    /* Estilo básico */
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start; /* Ajusta o conteúdo para o topo */
+      min-height: 100vh; /* Garante que a altura mínima seja de 100vh */
+      background-color: #b7a2bb;
+      background-image: url('https://i.pinimg.com/736x/1e/4c/9a/1e4c9a994e70a5a17126611ffb277160.jpg'); /* Fundo inicial */
+      background-size: cover;
+      background-position: center;
+      transition: background-image 2s ease-in-out;
+    }
+
+    h1 {
+      color: white;
+      font-size: 5vw;
+      text-align: center;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+      animation: fadeIn 3s ease-out;
+    }
+
+    p {
+      font-size: 2vw;
+      color: white;
+      text-align: center;
+      margin-top: 10px;
+      animation: fadeIn 3s ease-out;
+    }
+
+    .timer {
+      font-size: 3vw;
+      font-weight: bold;
+      margin-top: 20px;
+      color: white;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+      animation: fadeIn 4s ease-out;
+    }
+
+    /* Animação fadeIn */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Efeito para fotos em movimento */
+    .photo {
+      width: 80%; /* Responsivo para telas menores */
+      height: auto;
+      margin: 15px;
+      border-radius: 10px;
+      animation: movePhoto 6s infinite alternate;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .photo:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+    }
+
+    @keyframes movePhoto {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0); }
+    }
+
+    /* Container das fotos */
+    .photos-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+      flex-wrap: wrap;
+      animation: fadeIn 5s ease-out;
+    }
+
+    /* Botões de personalização */
+    .options {
+      margin-top: 40px;
+      text-align: center;
+      color: white;
+    }
+
+    .options button {
+      background-color: #000000;
+      border: none;
+      color: white;
+      font-size: 1.2em;
+      padding: 10px 20px;
+      margin: 10px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    .options button:hover {
+      background-color: #ff6f00;
+    }
+
+    /* Animação para os emojis de coração */
+    .heart {
+      font-size: 6vw;
+      animation: pulse 1.5s infinite alternate;
+      margin: 20px;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.2); }
+    }
+
+    .background-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.3);
+      z-index: -1;
+    }
+
+    /* Responsividade para telas pequenas */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 6vw; /* Tamanho da fonte menor em telas pequenas */
+      }
+      p, .timer {
+        font-size: 4vw;
+      }
+      .photo {
+        width: 90%; /* Fotos ainda menores para dispositivos muito pequenos */
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="background-overlay"></div>
+
+  <h1>Nosso Amor, Para Sempre</h1>
+  <p>Estamos juntos há <span id="relationship-time"></span></p>
+  <p>EU TE AMO VIDA!</p>
+
+  <div class="timer" id="timer">Carregando...</div>
+
+  <div>
+    <span class="heart">❤️</span>
+    <span class="heart">💖</span>
+    <span class="heart">💘</span>
+  </div>
+
+  <div class="photos-container">
+    <img src="imagens/WhatsApp Image 2024-12-13 at 03.45.28.jpeg" alt="Foto 1" class="photo">
+    <img src="foto2.jpg" alt="Foto 2" class="photo">
+    <img src="foto3.jpg" alt="Foto 3" class="photo">
+  </div>
+
+  <div class="options">
+    <button onclick="changeBackground()">Alterar Fundo</button>
+    <button onclick="addPhotos()">Adicionar Mais Fotos</button>
+  </div>
+
+  <script>
+    function updateTimer() {
+      const startDate = new Date("2024-11-05T19:52:00"); // Data de início do relacionamento
+      const now = new Date();
+      const timeDiff = now - startDate;
+
+      const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+      document.getElementById("timer").textContent = `${days} dias, ${hours} horas, ${minutes} minutos, ${seconds} segundos`;
+    }
+
+    setInterval(updateTimer, 1000);
+    updateTimer();
+
+    function changeBackground() {
+      const randomBackground = [
+        'url("https://i.pinimg.com/474x/f1/9f/85/f19f85ecb7b3eeb5db6ff1066e72bd47.jpg")',
+        'url("https://i.pinimg.com/474x/90/5b/1a/905b1a1a24b8fdc1827d9cc9a76b489a.jpg")',
+        'url("https://i.pinimg.com/236x/7e/cb/cb/7ecbcba2c5409baf7d3b65ba66275185.jpg")',
+        'url("https://i.pinimg.com/736x/03/62/04/0362049f9633873b53f43c606e9ecb2c.jpg")'
+      ];
+      const randomIndex = Math.floor(Math.random() * randomBackground.length);
+      document.body.style.backgroundImage = randomBackground[randomIndex];
+    }
+
+    function addPhotos() {
+      const newPhoto = document.createElement("img");
+      newPhoto.src = "foto4.jpg"; // Coloque a URL da nova foto aqui
+      newPhoto.alt = "Nova Foto";
+      newPhoto.classList.add("photo");
+      document.querySelector(".photos-container").appendChild(newPhoto);
+    }
+  </script>
+
+</body>
+</html>
